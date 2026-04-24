@@ -14,8 +14,13 @@ namespace Telegram_bot
         //Токен бота
 		private const string token = "8753839732:AAGPrIKho4MSNeJJthwdYzflAa3_uR0l1IY";
 
-        //Путь к файлу Json
-        private static string JsonPath = "tasks.json";
+        //Путь к папке проекта
+        static string projectDir = Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName;
+        //Путь к файлу tasks.json
+        private static string JsonPath = Path.Combine(projectDir,"tasks.json");
+
+        //Путь к файлу logs.txt
+        private static string LogPath = Path.Combine(projectDir, "logs.txt");
 
         //Библиотека задач c ключом ID пользователя
         private static Dictionary<long, List<string>> tasks = new();
@@ -183,7 +188,7 @@ namespace Telegram_bot
         /// <param name="log">Текст действия</param>
         static void Log(string log)
         {
-            File.AppendAllText("logs.txt", $"{DateTime.Now}: {log}\n");
+            File.AppendAllText(LogPath, $"{DateTime.Now}: {log}\n");
         }
     }
 }
